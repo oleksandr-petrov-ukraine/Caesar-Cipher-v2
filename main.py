@@ -8,12 +8,15 @@ def caesar_cipher(text, shift):
     if not isinstance(shift, int) or isinstance(shift, bool):
         raise TypeError('Shift must be an integer.')
 
-    if shift < 1 or shift > 25:
-        raise ValueError('Shift must be between 1 and 25.')
+    if shift < 1:
+        raise ValueError('Shift must be a positive integer.')
+
+    shift = shift % 26  # Normalize shift to be within the range of 0-25
     
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     shifted_alphabet = alphabet[shift:] + alphabet[:shift]
     translation_table = str.maketrans(alphabet + alphabet.upper(), shifted_alphabet + shifted_alphabet.upper())
+
     return text.translate(translation_table)
 
 encrypted_text = caesar_cipher("hello world", 3)
