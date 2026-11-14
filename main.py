@@ -1,4 +1,4 @@
-def caesar_cipher(text, shift):
+def caesar_cipher(text, shift, encrypt=True):
     if not isinstance(text, str):
         raise TypeError('Text must be a string.')
 
@@ -11,7 +11,13 @@ def caesar_cipher(text, shift):
     if shift < 1:
         raise ValueError('Shift must be a positive integer.')
 
-    shift = shift % 26  # Normalize shift to be within the range of 0-25
+    shift %= 26  # Normalize shift to be within the range of 0-25
+
+    if not isinstance(encrypt, bool):
+        raise TypeError('Encrypt must be a boolean.')
+
+    if not encrypt:
+        shift = -shift  # Reverse the shift for decryption
     
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     shifted_alphabet = alphabet[shift:] + alphabet[:shift]
