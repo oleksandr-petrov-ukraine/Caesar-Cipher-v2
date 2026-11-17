@@ -25,5 +25,23 @@ def caesar_cipher(text, shift, encrypt=True):
 
     return text.translate(translation_table)
 
-encrypted_text = caesar_cipher("hello world", 3)
-print(encrypted_text)
+if __name__ == '__main__':
+    text = input("Enter the text: ")
+
+    try:
+        shift = int(input('Enter the shift value (positive integer): '))
+        mode = input('Choose mode (1 - encrypt, 2 - decrypt): ')
+
+        if mode not in ('1', '2'):
+            raise ValueError('Invalid mode selected. Choose 1 for encrypt or 2 for decrypt.')
+
+        encrypt = mode == '1'
+        
+        result = caesar_cipher(text, shift, encrypt)
+        print(f'Result: {result}')
+
+    except ValueError as error:
+        print(f'Error: {error}')
+        
+    except TypeError as error:
+        print(f'Error: {error}')
